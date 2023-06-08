@@ -10,8 +10,8 @@ const Navbar = ({ session }: NavbarProps) => {
       <div>Logo</div>
       <div className="flex space-x-2 justify-end items-center">
         <div>
-          <p className="text-sm font-light">{session.user.name}</p>
-          <p className="text-sm font-light hidden sm:flex">
+          <p className="text-sm font-light text-white">{session.user.name}</p>
+          <p className="text-xs font-light hidden sm:flex">
             {session.user.email}
           </p>
         </div>
@@ -20,7 +20,7 @@ const Navbar = ({ session }: NavbarProps) => {
           height={40}
           className="rounded-lg"
           alt="Profile picture"
-          src={session?.user.image?.toString()}
+          src={session?.user.image || ""}
         />
       </div>
     </div>

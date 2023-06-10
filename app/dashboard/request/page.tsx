@@ -1,3 +1,4 @@
+import FriendRequest from "@/components/FriendRequest"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
@@ -24,7 +25,12 @@ const RequestFriendPage = async () => {
     })
   )
 
-  return <div>RequestFriendPage</div>
+  return (
+    <main className="flex flex-col items-center w-full p-2 space-y-10">
+      <h1 className="text-3xl md:text-5xl font-bold">Friend Request</h1>
+      <FriendRequest data={friendRequest} />
+    </main>
+  )
 }
 
 export default RequestFriendPage

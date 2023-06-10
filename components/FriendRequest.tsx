@@ -22,11 +22,11 @@ const FriendRequest = ({ data }: FriendRequestProps) => {
                 src={request.friendImageUrl}
                 width={50}
                 height={50}
-                className="w-6 md:w-12 h-6 md:h-12 rounded-lg"
+                className="w-6 sm:w-10 lg:w-12 h-6 sm:h-10 lg:h-12 rounded-lg"
               />
               <div className="flex flex-col mx-2 space-y-1">
-                <p className="text-xs md:text-base">{request.friendName}</p>
-                <p className="hidden md:flex">{request.friendEmail}</p>
+                <p className="text-xs lg:text-base">{request.friendName}</p>
+                <p className="hidden text-sm lg:flex ">{request.friendEmail}</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">

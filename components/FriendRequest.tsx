@@ -1,21 +1,51 @@
+"use client"
+
+import axios from "axios"
 import { UserPlus, X, XOctagon } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 interface FriendRequestProps {
   data: FriendRequest[]
 }
 
 const FriendRequest = ({ data }: FriendRequestProps) => {
+  const router = useRouter()
+  const [friendReq, setFriendReq] = useState<FriendRequest[]>(data)
+
+  const acceptFriendRequest = async (friendId: string) => {
+    await axios.post("/api/friends/accept", { id: friendId })
+
+    setFriendReq((prev) =>
+      prev.filter((request) => request.friendId !== friendId)
+    )
+    router.refresh()
+  }
+  const denyFriendRequest = async (senderId: string) => {
+    await axios.post("/api/friends/deny", { id: senderId })
+
+    setFriendReq((prev) =>
+      prev.filter((request) => request.friendId !== senderId)
+    )
+
+    router.refresh()
+  }
+
   return (
     <div className="w-full flex flex-col justify-start items-center md:items-start space-y-10">
       {data.length == 0 ? (
-        <p className="flex items-center justify-center text-4xl text-center">
-          <XOctagon />
+        <p className="flex flex-col md:flex-row items-center justify-center text-xl md:text-3xl text-center gap-x-2 w-full">
+          <XOctagon className="hidden md:flex w-9 h-9" />
           No friend request received today
+          <XOctagon className="md:hidden flex w-9 h-9" />
         </p>
       ) : (
-        data.map((request) => (
-          <div className="w-[75%] flex border justify-between items-center p-4 bg-[#1A1E23] border-zinc-800 shadow rounded-lg">
+        friendReq.map((request) => (
+          <div
+            key={request.friendId}
+            className="w-[75%] flex border justify-between items-center p-4 bg-[#1A1E23] border-zinc-800 shadow rounded-lg"
+          >
             <div className="flex items-center">
               <Image
                 alt="Profile Image"
@@ -30,11 +60,17 @@ const FriendRequest = ({ data }: FriendRequestProps) => {
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <button className="border border-black rounded-full md:rounded-lg p-2 flex items-center justify-center gap-x-2 hover:bg-green-600 hover:border-green-600">
+              <button
+                onClick={() => acceptFriendRequest(request.friendId)}
+                className="border border-black rounded-full md:rounded-lg p-2 flex items-center justify-center gap-x-2 hover:bg-green-600 hover:border-green-600"
+              >
                 <UserPlus className="w-5 h-5" />
                 <p className="hidden md:flex">ADD</p>
               </button>
-              <button className="border border-black rounded-full md:rounded-lg p-2 flex items-center justify-center gap-x-2 hover:bg-red-600 hover:border-red-600">
+              <button
+                onClick={() => denyFriendRequest(request.friendId)}
+                className="border border-black rounded-full md:rounded-lg p-2 flex items-center justify-center gap-x-2 hover:bg-red-600 hover:border-red-600"
+              >
                 <X className="w-5 h-5" />
                 <p className="hidden md:flex">DENY</p>
               </button>

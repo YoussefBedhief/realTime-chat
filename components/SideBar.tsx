@@ -20,8 +20,10 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
       <ul className="pt-6 space-y-4 text-xl w-16 xl:w-44">
         <li className=" text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <Link
+            rel="preload"
             className="flex flex-1 justify-between items-center gap-x-2 p-2"
             href={""}
+            as={""}
           >
             <div className="flex justify-center items-center space-x-2">
               <MessageCircle />
@@ -31,8 +33,10 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
         </li>
         <li className=" text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <Link
+            rel="preload"
             className="flex flex-1 justify-between items-center gap-x-2 p-2"
             href={""}
+            as={""}
           >
             <div className="flex justify-center items-center space-x-2">
               <MessagesSquare />
@@ -42,8 +46,10 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
         </li>
         <li className=" text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <Link
+            rel="preload"
             className="flex flex-1 justify-center xl:justify-between items-start xl:items-center xl:gap-x-2 p-2"
             href={"/dashboard/request"}
+            as={"/dashboard/request"}
           >
             <div className="flex justify-center items-center space-x-2">
               <Mailbox />
@@ -58,8 +64,10 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
         </li>
         <li className=" text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <Link
+            rel="preload"
             className="flex flex-1 justify-between items-center gap-x-2 p-2"
             href={"/dashboard/add"}
+            as={"/dashboard/add"}
           >
             <div className="flex justify-center items-center space-x-2">
               <UserPlus />

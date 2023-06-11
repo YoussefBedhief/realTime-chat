@@ -29,7 +29,7 @@ const DashbordLayout = async ({ children }: LayoutProps) => {
           unseenRequestCount={unseenRequestCount}
           sessionId={session.user.id}
         />
-        <ChatBar />
+        <ChatBar session={session} />
         {children}
       </div>
     </div>

@@ -7,12 +7,24 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface FriendRequestProps {
-  data: FriendRequest[]
+  data: {
+    friendId: string
+    friendEmail: string
+    friendName: string
+    friendImageUrl: string
+  }[]
 }
 
 const FriendRequest = ({ data }: FriendRequestProps) => {
   const router = useRouter()
-  const [friendReq, setFriendReq] = useState<FriendRequest[]>(data)
+  const [friendReq, setFriendReq] = useState<
+    {
+      friendId: string
+      friendEmail: string
+      friendName: string
+      friendImageUrl: string
+    }[]
+  >(data)
 
   const acceptFriendRequest = async (friendId: string) => {
     await axios.post("/api/friends/accept", { id: friendId })
@@ -50,6 +62,7 @@ const FriendRequest = ({ data }: FriendRequestProps) => {
               <Image
                 alt="Profile Image"
                 src={request.friendImageUrl}
+                referrerPolicy="no-referrer"
                 width={50}
                 height={50}
                 className="w-6 sm:w-10 lg:w-12 h-6 sm:h-10 lg:h-12 rounded-lg"

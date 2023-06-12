@@ -92,7 +92,7 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
           </button>
         </li>
       </ul>
-      <div className="hidden xl:flex bg-indigo-900 flex-col w-[75%] rounded-lg p-4 mb-10 space-y-10">
+      <div className="hidden xl:flex bg-[#B785F5] flex-col w-[75%] rounded-lg p-4 mb-10 space-y-10">
         <div className="text-center">
           <p className="text-center">Want to see the code source</p>
           <small className="text-center">check the repo linked bellow</small>

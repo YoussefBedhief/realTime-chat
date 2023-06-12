@@ -18,6 +18,7 @@ const Navbar = ({ session }: NavbarProps) => {
         <Image
           width={40}
           height={40}
+          referrerPolicy="no-referrer"
           className="rounded-lg"
           alt="Profile picture"
           src={session?.user.image || ""}

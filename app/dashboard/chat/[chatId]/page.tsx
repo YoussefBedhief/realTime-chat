@@ -1,8 +1,11 @@
+import InfoPanel from "@/components/InfoPanel"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { messageArraySchema } from "@/lib/validations/message"
+import { Palette, Trash2 } from "lucide-react"
 import { getServerSession } from "next-auth"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import React from "react"
 
@@ -51,7 +54,38 @@ const ChatPage = async ({ params }: ChatPageProps) => {
 
   const initialMessages = await getchatMessages(chatId)
 
-  return <div>{chatId}</div>
+  return (
+    <div className=" bg-[#20232B] flex flex-1 min-h-[92vh] max-h-[calc(100vh-6rem)] justify-between ">
+      <div className=" flex flex-col w-full">
+        <div className="bg-black flex p-2 items-center justify-between rounded-t-3xl ">
+          <div className="flex items-center space-x-4 flex-1">
+            <Image
+              src={chatPartner.image}
+              alt={`${chatPartner.name} profile image`}
+              width={50}
+              height={50}
+              className="rounded-lg"
+            />
+            <p className="">
+              <span className="font-light text-[#7A7A7A] ">
+                Conversation with
+              </span>{" "}
+              <span className="font-semibold">{chatPartner.name}</span>
+            </p>
+          </div>
+          <div className="flex items-center justify-evenly space-x-3 mr-2">
+            <button className="p-4 bg-[#262626] rounded-xl ">
+              Send an E-mail
+            </button>
+            <Palette className="h-5 w-5 cursor-pointer" />
+            <Trash2 className="h-5 w-5 cursor-pointer" />
+          </div>
+        </div>
+        <div className="flex-1 flex bg-[#1D1E24] "></div>
+      </div>
+      <InfoPanel />
+    </div>
+  )
 }
 
 export default ChatPage

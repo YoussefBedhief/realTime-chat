@@ -26,7 +26,7 @@ const RequestFriendPage = async () => {
   )
 
   return (
-    <main className="flex flex-col items-center w-full p-2 space-y-10">
+    <main className="flex flex-col items-center flex-1 p-2 space-y-10">
       <h1 className="text-3xl md:text-5xl font-bold">Friend Request</h1>
       <FriendRequest data={friendRequest} />
     </main>

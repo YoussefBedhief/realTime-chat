@@ -24,7 +24,7 @@ const DashbordLayout = async ({ children }: LayoutProps) => {
   return (
     <div className="bg-zinc-950 text-white">
       <Navbar session={session} />
-      <div className="flex space-x-2">
+      <div className="flex">
         <SideBar
           unseenRequestCount={unseenRequestCount}
           sessionId={session.user.id}

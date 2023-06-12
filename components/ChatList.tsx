@@ -42,6 +42,7 @@ const ChatList = ({ friends, session }: ChatListProps) => {
                 <Image
                   alt="profile image"
                   src={friend.image}
+                  referrerPolicy="no-referrer"
                   width={40}
                   height={40}
                   className="rounded-lg"

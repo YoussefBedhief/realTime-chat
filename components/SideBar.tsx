@@ -100,7 +100,7 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
         <Link
           href={"https://github.com/YoussefBedhief/realTime-chat"}
           target="_blank"
-          className="text-white flex justify-center items-center bg-black rounded-lg p-4"
+          className="text-white flex justify-center items-center bg-black rounded-lg p-2"
         >
           <Github />
           <p>github</p>

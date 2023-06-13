@@ -1,4 +1,5 @@
 import InfoPanel from "@/components/InfoPanel"
+import Messages from "@/components/Messages"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
@@ -81,7 +82,9 @@ const ChatPage = async ({ params }: ChatPageProps) => {
             <Trash2 className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
-        <div className="flex-1 flex bg-[#1D1E24] "></div>
+        <div className="flex-1 flex bg-[#1D1E24] ">
+          <Messages />
+        </div>
       </div>
       <InfoPanel />
     </div>

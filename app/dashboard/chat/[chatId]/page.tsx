@@ -1,3 +1,4 @@
+import ChatInput from "@/components/ChatInput"
 import InfoPanel from "@/components/InfoPanel"
 import Messages from "@/components/Messages"
 import { fetchRedis } from "@/helpers/redis"
@@ -57,7 +58,7 @@ const ChatPage = async ({ params }: ChatPageProps) => {
 
   return (
     <div className=" bg-[#20232B] flex flex-1 min-h-[92vh] max-h-[calc(100vh-6rem)] justify-between ">
-      <div className=" flex flex-col w-full">
+      <div className=" flex flex-col w-full justify-between h-full">
         <div className="bg-black flex p-2 items-center justify-between rounded-t-3xl ">
           <div className="flex items-center space-x-4 flex-1">
             <Image
@@ -82,8 +83,9 @@ const ChatPage = async ({ params }: ChatPageProps) => {
             <Trash2 className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
-        <div className="flex-1 flex bg-[#1D1E24] ">
-          <Messages />
+        <div className="flex-1 flex-col flex bg-[#1D1E24] ">
+          <Messages initialMessages={initialMessages} session={session} />
+          <ChatInput chatPartner={chatPartner} />
         </div>
       </div>
       <InfoPanel />

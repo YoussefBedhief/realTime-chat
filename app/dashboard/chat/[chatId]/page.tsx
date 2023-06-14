@@ -85,7 +85,7 @@ const ChatPage = async ({ params }: ChatPageProps) => {
         </div>
         <div className="flex-1 flex-col flex bg-[#1D1E24] ">
           <Messages initialMessages={initialMessages} session={session} />
-          <ChatInput chatPartner={chatPartner} />
+          <ChatInput chatId={chatId} chatPartner={chatPartner} />
         </div>
       </div>
       <InfoPanel />

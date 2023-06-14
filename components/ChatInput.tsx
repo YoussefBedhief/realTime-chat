@@ -1,19 +1,36 @@
 "use client"
+import { SendIcon } from "lucide-react"
 import { useRef, useState } from "react"
 import TextareaAutosize from "react-textarea-autosize"
+import Button from "./ui/Button"
+import axios from "axios"
+import { toast } from "react-hot-toast"
 
 interface ChatInputProps {
   chatPartner: User
+  chatId: string
 }
 
-const ChatInput = ({ chatPartner }: ChatInputProps) => {
+const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
   const [input, setInput] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
 
-  const sendMessage = () => {}
+  const sendMessage = async () => {
+    setLoading(true)
+    try {
+      await axios.post("/api/message/send", { text: input, chatId })
+      setInput("")
+      textAreaRef?.current?.focus()
+    } catch {
+      toast.error("Error while sending message")
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
-    <div className=" text-white flex w-full my-4">
-      <div className="bg-[#16171B] rounded-xl flex-1 p-2 mx-4 focus-within:ring-inset focus-within:ring-1 ring-indigo-600 ">
+    <div className=" text-white flex w-full my-4 items-center">
+      <div className="bg-[#16171B] rounded-xl flex items-center justify-between flex-1 p-2 mx-4 focus-within:ring-inset focus-within:ring-1 ring-indigo-600 ">
         <TextareaAutosize
           ref={textAreaRef}
           onKeyDown={(e) => {
@@ -28,12 +45,21 @@ const ChatInput = ({ chatPartner }: ChatInputProps) => {
           placeholder={`Say hi 👋 to ${chatPartner.name}`}
           className="w-full resize-none border-0 bg-transparent text-white placeholder:text-gray-600 ring-0 outline-none focus:ring-0 "
         />
-        <div
-          onClick={() => textAreaRef.current?.focus()}
-          className="py-2"
-          aria-hidden="true"
-        ></div>
-        <div></div>
+        <div className="group hover:bg-indigo-800 rounded-lg flex items-end justify-center">
+          <Button
+            isLoading={loading}
+            variant={"normal"}
+            size={"sm"}
+            type="submit"
+            onClick={() => {
+              sendMessage()
+            }}
+          >
+            {loading ? null : (
+              <SendIcon className="text-indigo-800 group-hover:text-white mt-1" />
+            )}
+          </Button>
+        </div>
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-slate-900 text-white hover:bg-slate-800",
         ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
+        normal: "text-indigo-800 hover:text-white",
       },
       size: {
         default: "h-10 py-2 px-4",

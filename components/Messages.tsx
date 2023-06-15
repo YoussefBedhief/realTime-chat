@@ -1,19 +1,26 @@
 "use client"
 import { cn } from "@/lib/utils"
+import { format } from "date-fns"
 import { Session } from "next-auth"
+import Image from "next/image"
 import React, { useRef, useState } from "react"
 
 interface MessageProps {
   initialMessages: Message[]
   session: Session
+  chatPartner: User
 }
 
-const Messages = ({ initialMessages, session }: MessageProps) => {
+const Messages = ({ initialMessages, session, chatPartner }: MessageProps) => {
   const scrollDownRef = useRef<HTMLDivElement | null>(null)
   const [messages, setMessages] = useState<Message[]>(initialMessages)
 
+  const formatTimestamp = (timestamp: number) => {
+    return format(timestamp, "HH:mm")
+  }
+
   return (
-    <div className="flex flex-1 h-full flex-col-reverse gap-4 p-3 overflow-y-auto">
+    <div className="flex flex-1 h-full flex-col-reverse gap-3 p-3 overflow-y-auto">
       <div ref={scrollDownRef} />
 
       {messages.map((message, i) => {
@@ -36,7 +43,11 @@ const Messages = ({ initialMessages, session }: MessageProps) => {
                   }
                 )}
               >
-                {message.timestamp}
+                {hasNextMessageFromSameUser ? (
+                  <p className="text-gray-400">
+                    {formatTimestamp(message.timestamp)}
+                  </p>
+                ) : null}
                 <span
                   className={cn(
                     "px-4 py-2 inline-block rounded-lg text-white",
@@ -48,6 +59,25 @@ const Messages = ({ initialMessages, session }: MessageProps) => {
                 >
                   {message.text}
                 </span>
+              </div>
+              <div
+                className={cn("relative w-6 h-6", {
+                  "order-2": isCurrentUser,
+                  "order-1": !isCurrentUser,
+                  invisible: hasNextMessageFromSameUser,
+                })}
+              >
+                <Image
+                  className="rounded-lg"
+                  fill
+                  referrerPolicy="no-referrer"
+                  alt={`${message.senderId} profile image`}
+                  src={
+                    isCurrentUser
+                      ? (session.user.image as string)
+                      : chatPartner.image
+                  }
+                />
               </div>
             </div>
           </div>

@@ -17,13 +17,20 @@ const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const sendMessage = async () => {
+    if (!input) return
     setLoading(true)
+
     try {
+      console.log("first")
       await axios.post("/api/message/send", { text: input, chatId })
+      console.log("second")
+
       setInput("")
-      textAreaRef?.current?.focus()
+      console.log("third")
+      textAreaRef.current?.focus()
+      console.log("Sent")
     } catch {
-      toast.error("Error while sending message")
+      toast.error("Something went wrong. Please try again later.")
     } finally {
       setLoading(false)
     }

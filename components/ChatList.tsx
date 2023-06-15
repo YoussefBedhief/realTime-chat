@@ -2,7 +2,7 @@
 import { ChatUrlSort } from "@/lib/utils"
 import { Session } from "next-auth"
 import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
 interface ChatListProps {
@@ -11,7 +11,6 @@ interface ChatListProps {
 }
 
 const ChatList = ({ friends, session }: ChatListProps) => {
-  const router = useRouter()
   const pathname = usePathname()
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([])
 

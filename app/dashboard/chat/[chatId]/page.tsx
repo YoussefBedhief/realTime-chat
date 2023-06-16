@@ -92,7 +92,7 @@ const ChatPage = async ({ params }: ChatPageProps) => {
           <ChatInput chatId={chatId} chatPartner={chatPartner} />
         </div>
       </div>
-      <InfoPanel />
+      <InfoPanel chatPartner={chatPartner} />
     </div>
   )
 }

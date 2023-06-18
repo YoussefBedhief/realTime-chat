@@ -1,19 +1,41 @@
 "use client"
-import { cn } from "@/lib/utils"
+import { pusherClient } from "@/lib/pusher"
+import { cn, toPusherKey } from "@/lib/utils"
 import { format } from "date-fns"
 import { Session } from "next-auth"
 import Image from "next/image"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 interface MessageProps {
+  chatId: string
   initialMessages: Message[]
   session: Session
   chatPartner: User
 }
 
-const Messages = ({ initialMessages, session, chatPartner }: MessageProps) => {
+const Messages = ({
+  initialMessages,
+  session,
+  chatPartner,
+  chatId,
+}: MessageProps) => {
   const scrollDownRef = useRef<HTMLDivElement | null>(null)
   const [messages, setMessages] = useState<Message[]>(initialMessages)
+
+  useEffect(() => {
+    pusherClient.subscribe(toPusherKey(`chat:${chatId}`))
+
+    const messageHandler = (message: Message) => {
+      setMessages((prev) => [message, ...prev])
+    }
+
+    pusherClient.bind("incoming_message", messageHandler)
+
+    return () => {
+      pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`))
+      pusherClient.unbind("incoming_message", messageHandler)
+    }
+  }, [chatId])
 
   const formatTimestamp = (timestamp: number) => {
     return format(timestamp, "HH:mm")
@@ -30,7 +52,7 @@ const Messages = ({ initialMessages, session, chatPartner }: MessageProps) => {
         return (
           <div className="" key={`${message.id}-${message.timestamp}`}>
             <div
-              className={cn("flex items-center", {
+              className={cn("flex items-end", {
                 "justify-end": isCurrentUser,
               })}
             >
@@ -43,8 +65,8 @@ const Messages = ({ initialMessages, session, chatPartner }: MessageProps) => {
                   }
                 )}
               >
-                {hasNextMessageFromSameUser ? (
-                  <p className="text-gray-400">
+                {!hasNextMessageFromSameUser ? (
+                  <p className="text-gray-400 text-xs">
                     {formatTimestamp(message.timestamp)}
                   </p>
                 ) : null}

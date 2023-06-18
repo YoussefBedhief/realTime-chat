@@ -1,10 +1,12 @@
 "use client"
+import { pusherClient } from "@/lib/pusher"
+import { toPusherKey } from "@/lib/utils"
 import { Github, LogOut, Mailbox, MessagesSquare, UserPlus } from "lucide-react"
 import { MessageCircle } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 
 interface SideBarProps {
@@ -15,6 +17,27 @@ interface SideBarProps {
 const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
   const router = useRouter()
   const [requestCount, setRequestCount] = useState<number>(unseenRequestCount)
+
+  useEffect(() => {
+    try {
+    } catch (error) {}
+    pusherClient.subscribe(
+      toPusherKey(`user:${sessionId}:incoming_friend_requests`)
+    )
+
+    const friendRequestHandler = () => {
+      setRequestCount((prev) => prev + 1)
+    }
+
+    pusherClient.bind("incoming_friend_requests", friendRequestHandler)
+
+    return () => {
+      pusherClient.unsubscribe(
+        toPusherKey(`user:${sessionId}:incoming_friend_requests`)
+      )
+      pusherClient.unbind("incoming_friend_requests", friendRequestHandler)
+    }
+  }, [])
   return (
     <div className="flex flex-col justify-between min-h-[92vh] items-center xl:w-56 bg-zinc-950">
       <ul className="pt-6 space-y-4 text-xl w-16 xl:w-44">
@@ -47,7 +70,8 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
         <li className=" text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <Link
             rel="preload"
-            className="flex flex-1 justify-center xl:justify-between items-start xl:items-center xl:gap-x-2 p-2"
+            className="flex flex-1 justify-start xl:justify-between items-start xl:items-center xl:gap-x-2 p-2"
+            onClick={() => setRequestCount(0)}
             href={"/dashboard/request"}
             as={"/dashboard/request"}
           >

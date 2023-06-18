@@ -83,8 +83,9 @@ const ChatPage = async ({ params }: ChatPageProps) => {
             <Trash2 className="h-5 w-5 cursor-pointer" />
           </div>
         </div>
-        <div className="flex-1 flex-col flex bg-[#1D1E24] ">
+        <div className="flex-1 flex-col flex bg-[#1D1E24] overflow-y-auto">
           <Messages
+            chatId={chatId}
             chatPartner={chatPartner}
             initialMessages={initialMessages}
             session={session}

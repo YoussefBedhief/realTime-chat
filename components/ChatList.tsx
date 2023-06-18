@@ -1,18 +1,71 @@
 "use client"
-import { ChatUrlSort } from "@/lib/utils"
+import { pusherClient } from "@/lib/pusher"
+import { ChatUrlSort, toPusherKey } from "@/lib/utils"
 import { Session } from "next-auth"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { toast } from "react-hot-toast"
+import UnseenChatToast from "./UnseenChatToast"
 
 interface ChatListProps {
   friends: User[]
   session: Session
 }
 
+interface ExtendedMessage extends Message {
+  senderImg: string
+  senderName: string
+}
+
 const ChatList = ({ friends, session }: ChatListProps) => {
+  const router = useRouter()
   const pathname = usePathname()
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([])
+  const [friendList, setFriendList] = useState<User[]>(friends)
+
+  useEffect(() => {
+    pusherClient.subscribe(toPusherKey(`user:${session.user.id}:chats`))
+    pusherClient.subscribe(toPusherKey(`user:${session.user.id}:friends`))
+
+    const newFriendHandler = (newFriend: User) => {
+      console.log("received new user", newFriend)
+      setFriendList((prev) => [...prev, newFriend])
+    }
+
+    const chatHandler = (message: ExtendedMessage) => {
+      const shouldNotify =
+        pathname !==
+        `/dashboard/chat/${ChatUrlSort(session.user.id, message.senderId)}`
+
+      if (!shouldNotify) return
+
+      // should be notified
+      toast.custom((t) => (
+        <UnseenChatToast
+          t={t}
+          sessionId={session.user.id}
+          senderId={message.senderId}
+          senderImg={message.senderImg}
+          senderMessage={message.text}
+          senderName={message.senderName}
+        />
+      ))
+
+      setUnseenMessages((prev) => [...prev, message])
+    }
+
+    pusherClient.bind("new_message", chatHandler)
+    pusherClient.bind("new_friend", newFriendHandler)
+
+    return () => {
+      pusherClient.unsubscribe(toPusherKey(`user:${session.user.id}:chats`))
+      pusherClient.unsubscribe(toPusherKey(`user:${session.user.id}:friends`))
+
+      pusherClient.unbind("new_message", chatHandler)
+      pusherClient.unbind("new_friend", newFriendHandler)
+    }
+  }, [pathname, session.user.id, router])
 
   useEffect(() => {
     if (pathname?.includes("chat")) {
@@ -24,7 +77,7 @@ const ChatList = ({ friends, session }: ChatListProps) => {
 
   return (
     <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
-      {friends.sort().map((friend) => {
+      {friendList.sort().map((friend) => {
         const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
           return unseenMsg.senderId === friend.id
         }).length

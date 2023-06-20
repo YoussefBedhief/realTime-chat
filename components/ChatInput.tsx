@@ -45,7 +45,7 @@ const ChatInput = ({ chatPartner, chatId }: ChatInputProps) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Say hi 👋 to ${chatPartner.name}`}
-          className="w-full resize-none border-0 bg-transparent text-white placeholder:text-gray-600 ring-0 outline-none focus:ring-0 "
+          className="w-full resize-none border-0 bg-transparent text-white placeholder:text-gray-600 ring-0 outline-none focus:ring-0 placeholder:text-xs md:placeholder:text-sm xl:placeholder:text-base"
         />
         <div className="group hover:bg-indigo-800 rounded-lg flex items-end justify-center">
           <Button

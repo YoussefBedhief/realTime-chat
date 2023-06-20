@@ -7,7 +7,7 @@ interface InfoPanelProps {
 
 const InfoPanel = ({ chatPartner }: InfoPanelProps) => {
   return (
-    <div className="w-[400px] flex flex-col gap-y-2">
+    <div className="w-[400px] xl:flex flex-col gap-y-2 hidden ">
       <div className="bg-[#5852D6] flex flex-col p-4 m-2 rounded-xl space-y-4">
         <div className="flex space-x-3 items-center">
           <div className="relative w-8 h-8">

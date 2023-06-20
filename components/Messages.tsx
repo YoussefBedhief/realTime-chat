@@ -42,7 +42,7 @@ const Messages = ({
   }
 
   return (
-    <div className="flex flex-1 h-full flex-col-reverse gap-3 p-3 overflow-y-auto">
+    <div className="flex flex-1 h-full flex-col-reverse gap-3 p-3 overflow-y-auto scrollbar-thumb-zinc-500 scrollbar-thin scrollbar-thumb-rounded-full">
       <div ref={scrollDownRef} />
 
       {messages.map((message, i) => {
@@ -72,7 +72,7 @@ const Messages = ({
                 ) : null}
                 <span
                   className={cn(
-                    "px-4 py-2 inline-block rounded-lg text-white",
+                    "px-4 py-2 inline-block rounded-lg text-white text-xs md:text-sm xl:text-base",
                     {
                       "bg-[#B785F5] rounded-br-none": isCurrentUser,
                       "bg-[#16171B] rounded-tl-none": !isCurrentUser,

@@ -9,7 +9,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import React from "react"
 
-const DashboardPage = async () => {
+const AllChatPage = async () => {
   const session = await getServerSession(authOptions)
   if (!session) notFound()
 
@@ -86,4 +86,4 @@ const DashboardPage = async () => {
   )
 }
 
-export default DashboardPage
+export default AllChatPage

@@ -1,7 +1,14 @@
 "use client"
 import { pusherClient } from "@/lib/pusher"
 import { toPusherKey } from "@/lib/utils"
-import { Github, LogOut, Mailbox, MessagesSquare, UserPlus } from "lucide-react"
+import {
+  Github,
+  LayoutDashboardIcon,
+  LogOut,
+  Mailbox,
+  MessagesSquare,
+  UserPlus,
+} from "lucide-react"
 import { MessageCircle } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
@@ -37,7 +44,7 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
       )
       pusherClient.unbind("incoming_friend_requests", friendRequestHandler)
     }
-  }, [])
+  }, [sessionId])
   return (
     <div className="flex flex-col justify-between min-h-[92vh] items-center xl:w-56 bg-zinc-950">
       <ul className="pt-6 space-y-4 text-xl w-16 xl:w-44">
@@ -49,8 +56,8 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
             as={""}
           >
             <div className="flex justify-center items-center space-x-2">
-              <MessageCircle />
-              <p className="hidden xl:flex">Chat</p>
+              <LayoutDashboardIcon />
+              <p className="hidden xl:flex">Dashboard</p>
             </div>
           </Link>
         </li>
@@ -58,8 +65,8 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
           <Link
             rel="preload"
             className="flex flex-1 justify-between items-center gap-x-2 p-2"
-            href={""}
-            as={""}
+            href={"/dashboard/allChat"}
+            as={"/dashboard/allChat"}
           >
             <div className="flex justify-center items-center space-x-2">
               <MessagesSquare />

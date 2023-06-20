@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import UnseenChatToast from "./UnseenChatToast"
+import SearchBar from "./SearchBar"
 
 interface ChatListProps {
   friends: User[]
@@ -29,7 +30,6 @@ const ChatList = ({ friends, session }: ChatListProps) => {
     pusherClient.subscribe(toPusherKey(`user:${session.user.id}:friends`))
 
     const newFriendHandler = (newFriend: User) => {
-      console.log("received new user", newFriend)
       setFriendList((prev) => [...prev, newFriend])
     }
 
@@ -76,48 +76,51 @@ const ChatList = ({ friends, session }: ChatListProps) => {
   }, [pathname])
 
   return (
-    <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
-      {friendList.sort().map((friend) => {
-        const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
-          return unseenMsg.senderId === friend.id
-        }).length
-        return (
-          <li key={friend.id} className="hover:bg-[#1A1E23] rounded-lg group">
-            <a
-              href={`/dashboard/chat/${ChatUrlSort(
-                friend.id,
-                session.user.id
-              )}`}
-              className=" text-white font-semibold flex justify-start items-center space-x-2 p-2"
-            >
-              <div className="flex items-end">
-                <Image
-                  alt="profile image"
-                  src={friend.image}
-                  referrerPolicy="no-referrer"
-                  width={40}
-                  height={40}
-                  className="rounded-lg"
-                />
-                {unseenMessagesCount > 0 ? (
-                  <div className="bg-indigo-600 font-extralight text-xs text-white w-4 h-4 rounded-full flex items-center justify-center p-2 relative right-2">
-                    {unseenMessagesCount}
-                  </div>
-                ) : null}
-              </div>
-              <div className=" truncate">
-                <p className="text-sm group-hover:text-[#5852D6] ">
-                  {friend.name}
-                </p>
-                <p className="text-xs font-light text-[#C1C2C8]">
-                  {friend.email}
-                </p>
-              </div>
-            </a>
-          </li>
-        )
-      })}
-    </ul>
+    <>
+      <SearchBar friendList={friendList} setFriendList={setFriendList} />
+      <ul role="list" className="max-h-[25rem] overflow-y-auto -mx-2 space-y-1">
+        {friendList.sort().map((friend) => {
+          const unseenMessagesCount = unseenMessages.filter((unseenMsg) => {
+            return unseenMsg.senderId === friend.id
+          }).length
+          return (
+            <li key={friend.id} className="hover:bg-[#1A1E23] rounded-lg group">
+              <a
+                href={`/dashboard/chat/${ChatUrlSort(
+                  friend.id,
+                  session.user.id
+                )}`}
+                className=" text-white font-semibold flex justify-start items-center space-x-2 p-2"
+              >
+                <div className="flex items-end">
+                  <Image
+                    alt="profile image"
+                    src={friend.image}
+                    referrerPolicy="no-referrer"
+                    width={40}
+                    height={40}
+                    className="rounded-lg"
+                  />
+                  {unseenMessagesCount > 0 ? (
+                    <div className="bg-indigo-600 font-extralight text-xs text-white w-4 h-4 rounded-full flex items-center justify-center p-2 relative right-2">
+                      {unseenMessagesCount}
+                    </div>
+                  ) : null}
+                </div>
+                <div className=" truncate">
+                  <p className="text-sm group-hover:text-[#5852D6] ">
+                    {friend.name}
+                  </p>
+                  <p className="text-xs font-light text-[#C1C2C8]">
+                    {friend.email}
+                  </p>
+                </div>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </>
   )
 }
 

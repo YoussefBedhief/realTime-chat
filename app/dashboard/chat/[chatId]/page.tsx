@@ -66,17 +66,19 @@ const ChatPage = async ({ params }: ChatPageProps) => {
               alt={`${chatPartner.name} profile image`}
               width={50}
               height={50}
-              className="rounded-lg"
+              className="rounded-lg w-7 h-7 md:w-10 md:h-10 xl:w-12 xl:h-12"
             />
             <p className="">
-              <span className="font-light text-[#7A7A7A] ">
+              <span className=" hidden md:flex xl:inline font-light text-[#7A7A7A] ">
                 Conversation with
               </span>{" "}
-              <span className="font-semibold">{chatPartner.name}</span>
+              <span className="font-semibold text-xs md:text-sm xl:text-base">
+                {chatPartner.name}
+              </span>
             </p>
           </div>
           <div className="flex items-center justify-evenly space-x-3 mr-2">
-            <button className="p-4 bg-[#262626] rounded-xl ">
+            <button className="hidden md:flex p-4 bg-[#262626] rounded-xl ">
               Send an E-mail
             </button>
             <Palette className="h-5 w-5 cursor-pointer" />

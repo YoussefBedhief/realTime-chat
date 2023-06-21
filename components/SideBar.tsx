@@ -70,7 +70,7 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
           >
             <div className="flex justify-center items-center space-x-2">
               <MessagesSquare />
-              <p className="hidden xl:flex"> All</p>
+              <p className="hidden xl:flex">Latest</p>
             </div>
           </Link>
         </li>

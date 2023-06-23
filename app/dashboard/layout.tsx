@@ -1,6 +1,8 @@
 import ChatBar from "@/components/ChatBar"
+import MobileSideBar from "@/components/MobileSideBar"
 import Navbar from "@/components/Navbar"
 import SideBar from "@/components/SideBar"
+import { getFriendsByUserId } from "@/helpers/friend-by-id"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
@@ -14,6 +16,7 @@ interface LayoutProps {
 const DashbordLayout = async ({ children }: LayoutProps) => {
   const session = await getServerSession(authOptions)
   if (!session) notFound()
+  const friends = await getFriendsByUserId(session.user.id)
 
   const unseenRequestCount = (
     (await fetchRedis(
@@ -29,6 +32,7 @@ const DashbordLayout = async ({ children }: LayoutProps) => {
           unseenRequestCount={unseenRequestCount}
           sessionId={session.user.id}
         />
+        <MobileSideBar session={session} friends={friends} />
         <ChatBar session={session} />
         {children}
       </div>

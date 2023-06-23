@@ -2,6 +2,7 @@ import { getFriendsByUserId } from "@/helpers/friend-by-id"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { ChatUrlSort } from "@/lib/utils"
+import { format } from "date-fns"
 import { ChevronRight } from "lucide-react"
 import { getServerSession } from "next-auth"
 import Image from "next/image"
@@ -32,7 +33,9 @@ const AllChatPage = async () => {
       }
     })
   )
-
+  const formatTimestamp = (timestamp: number) => {
+    return format(timestamp, "HH:mm")
+  }
   return (
     <div className="flex w-full flex-col mx-4 py-12 space-y-2">
       <h1 className="font-bold text-5xl mb-8">Recent chats</h1>
@@ -69,13 +72,14 @@ const AllChatPage = async () => {
 
               <div>
                 <h4 className="text-lg font-semibold">{friend.name}</h4>
-                <p className="mt-1 max-w-md">
+                <p className="mt-1 max-w-md flex gap-x-1">
                   <span className="text-zinc-400">
                     {friend.lastMessage.senderId === session.user.id
                       ? "You: "
                       : ""}
                   </span>
-                  {friend.lastMessage.text}
+                  {friend.lastMessage.text}{" "}
+                  {formatTimestamp(friend.lastMessage.timestamp)}
                 </p>
               </div>
             </Link>

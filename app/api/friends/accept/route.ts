@@ -11,7 +11,6 @@ export async function POST(req: Request) {
     const body = await req.json()
 
     const { id: idToAccept } = z.object({ id: z.string() }).parse(body)
-    console.log("body content", body)
     const session = await getServerSession(authOptions)
 
     // If the user is not authenticated then return an error

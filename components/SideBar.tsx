@@ -111,6 +111,19 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
             </div>
           </Link>
         </li>
+        <li className=" md:hidden text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
+          <Link
+            rel="preload"
+            className="flex flex-1 justify-between items-center gap-x-2 p-2"
+            href={""}
+            as={""}
+          >
+            <div className="flex justify-center items-center space-x-2">
+              <LayoutDashboardIcon />
+              <p className="hidden xl:flex">Dashboard</p>
+            </div>
+          </Link>
+        </li>
         <li className=" flex justify-between items-center text-gray-500 hover:bg-indigo-900 rounded-lg hover:text-white">
           <button
             className="flex items-center gap-x-2 p-2"

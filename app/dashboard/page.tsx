@@ -30,7 +30,7 @@ const DashboardPage = async () => {
           Hello, 👋 {session.user.name} and welcome.
         </h1>
         <p className="text-center xl:text-xl">
-          Like i see you're a new user, cool{" "}
+          Like i see you re a new user, cool{" "}
         </p>
         <Callout
           className="bg-zinc-900"
@@ -93,8 +93,8 @@ const DashboardPage = async () => {
     })
 
     return (
-      <div className="flex flex-col p-4 w-full gap-y-4">
-        <div className="grid grid-cols-3 gap-4">
+      <div className="flex flex-col py-20 px-3 md:p-4 w-full gap-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           <Card decoration="top" decorationColor="blue" className="gap-y-5">
             <div className="space-y-2">
               <div className="flex flex-row space-x-3 items-center justify-start">
@@ -164,7 +164,7 @@ const DashboardPage = async () => {
             />
             <Legend categories={legendData} className="mt-6" />
           </Card>
-          <Card className="col-span-2">
+          <Card className="md:col-span-2">
             <Title> All Messages</Title>
             <BarChart
               data={allMessages}

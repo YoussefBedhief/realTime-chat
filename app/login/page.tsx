@@ -4,6 +4,8 @@ import Button from "@/components/ui/Button"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { toast } from "react-hot-toast"
+import Image from "next/image"
+import BgImage from "@/image/img1.jpg"
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -19,19 +21,22 @@ const LoginPage = () => {
   }
   return (
     <>
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full flex flex-col items-center max-w-md space-y-8">
-          <div className="flex flex-col items-center gap-8">
+      <div className="flex min-h-full bg-zinc-800 items-center justify-center xl:justify-between py-12 xl:py-0 ">
+        <div className="xl:flex relative min-h-screen w-[75vh] hidden">
+          <Image fill src={BgImage} alt="Login page Image" />
+        </div>
+        <div className="flex flex-col items-center max-w-md space-y-8">
+          <div className="flex flex-col items-center gap-8 text-white">
             logo
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Sign in to your account
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
+              Sign with your Google account
             </h2>
           </div>
 
           <Button
             isLoading={isLoading}
             type="button"
-            className="max-w-sm mx-auto w-full"
+            className="max-w-sm mx-auto w-full text-gray-500 bg-white"
             onClick={loginWithGoogle}
           >
             {isLoading ? null : (
@@ -67,6 +72,7 @@ const LoginPage = () => {
             Login with Google
           </Button>
         </div>
+        <div></div>
       </div>
     </>
   )

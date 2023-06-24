@@ -161,8 +161,39 @@ const DashboardPage = async () => {
               variant="pie"
               category="number"
               index="email"
+              colors={[
+                "cyan",
+                "sky",
+                "blue",
+                "indigo",
+                "violet",
+                "purple",
+                "fuchsia",
+                "pink",
+                "rose",
+                "red",
+                "orange",
+                "amber",
+              ]}
             />
-            <Legend categories={legendData} className="mt-6" />
+            <Legend
+              categories={legendData}
+              className="mt-6"
+              colors={[
+                "cyan",
+                "sky",
+                "blue",
+                "indigo",
+                "violet",
+                "purple",
+                "fuchsia",
+                "pink",
+                "rose",
+                "red",
+                "orange",
+                "amber",
+              ]}
+            />
           </Card>
           <Card className="md:col-span-2">
             <Title> All Messages</Title>
@@ -170,7 +201,20 @@ const DashboardPage = async () => {
               data={allMessages}
               index="email"
               categories={["Total messages texted"]}
-              colors={["indigo"]}
+              colors={[
+                "cyan",
+                "sky",
+                "blue",
+                "indigo",
+                "violet",
+                "purple",
+                "fuchsia",
+                "pink",
+                "rose",
+                "red",
+                "orange",
+                "amber",
+              ]}
             />
           </Card>
         </div>

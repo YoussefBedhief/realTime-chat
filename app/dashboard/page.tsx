@@ -30,7 +30,7 @@ const DashboardPage = async () => {
           Hello, 👋 {session.user.name} and welcome.
         </h1>
         <p className="text-center xl:text-xl">
-          Like i see you re a new user, cool{" "}
+          Like i see you re a new user, cool
         </p>
         <Callout
           className="bg-zinc-900"

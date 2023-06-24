@@ -9,7 +9,6 @@ import {
   MessagesSquare,
   UserPlus,
 } from "lucide-react"
-import { MessageCircle } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -83,7 +82,6 @@ const SideBar = ({ unseenRequestCount, sessionId }: SideBarProps) => {
           <Link
             rel="preload"
             className="flex flex-1 justify-start xl:justify-between items-start xl:items-center xl:gap-x-2 p-2"
-            onClick={() => setRequestCount(0)}
             href={"/dashboard/request"}
             as={"/dashboard/request"}
           >

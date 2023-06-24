@@ -31,7 +31,6 @@ const ChatList = ({ friends, session }: ChatListProps) => {
 
     const newFriendHandler = (newFriend: User) => {
       setFriendList((prev) => [...prev, newFriend])
-      toast.success("New Friend Added")
     }
 
     const chatHandler = (message: ExtendedMessage) => {

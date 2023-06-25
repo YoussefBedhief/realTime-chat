@@ -1,8 +1,8 @@
 # Friend Circle
 ![logo](https://github.com/YoussefBedhief/realTime-chat/assets/69478528/76c457dd-7564-4685-b6ae-35f3e8c50553)
 
-This project is a real time chat application with Nextjs 13 which include many features like:
-- Stunnig desin
+This project is a real time chat application with Nextjs 13 which includes many features like:
+- Stunning design
 - Login with Google account using next-auth
 - Dashboard with tremor 2.0
 - Posiibility to send an invitation to another user

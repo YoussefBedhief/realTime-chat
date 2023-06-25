@@ -4,7 +4,8 @@ import { Transition, Dialog } from "@headlessui/react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { FC, Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
+import Logo from "@/image/logo.png"
 
 import { Session } from "next-auth"
 import { usePathname } from "next/navigation"
@@ -28,7 +29,9 @@ const MobileSideBar = ({ session, friends }: MobileSideBarProps) => {
   return (
     <div className="fixed md:hidden bg-[#20232B] border-b text-[#C1C2C8] border-zinc-800 top-0 inset-x-0 px-4">
       <div className="flex justify-between items-center p-2 w-full">
-        <Link href="/dashboard">Logo </Link>
+        <Link href="/dashboard">
+          <Image src={Logo} alt="Logo image" width={30} height={30} />
+        </Link>
         <Button onClick={() => setOpen(true)} className="gap-4">
           Chat <Menu className="h-6 w-6" />
         </Button>

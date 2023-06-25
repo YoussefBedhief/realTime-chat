@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import { toast } from "react-hot-toast"
 import Image from "next/image"
 import BgImage from "@/image/img1.jpg"
+import Logo from "@/image/logo.png"
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -27,16 +28,15 @@ const LoginPage = () => {
         </div>
         <div className="flex flex-col items-center max-w-md space-y-8">
           <div className="flex flex-col items-center gap-8 text-white">
-            logo
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">
+            <Image src={Logo} alt="Logo image" width={100} height={100} />
+            <h2 className=" text-center text-3xl font-bold tracking-tight text-white">
               Sign with your Google account
             </h2>
           </div>
-
           <Button
             isLoading={isLoading}
             type="button"
-            className="max-w-sm mx-auto w-full text-gray-500 bg-white"
+            className="max-w-sm mx-auto w-full text-gray-500 bg-white hover:bg-slate-200"
             onClick={loginWithGoogle}
           >
             {isLoading ? null : (

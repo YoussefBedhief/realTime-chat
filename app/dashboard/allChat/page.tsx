@@ -4,11 +4,16 @@ import { authOptions } from "@/lib/auth"
 import { ChatUrlSort } from "@/lib/utils"
 import { format } from "date-fns"
 import { ChevronRight } from "lucide-react"
+import { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import React from "react"
+
+export const metadata: Metadata = {
+  title: "Friend Circle | Latest messages",
+}
 
 const AllChatPage = async () => {
   const session = await getServerSession(authOptions)

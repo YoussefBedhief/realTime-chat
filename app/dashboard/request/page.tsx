@@ -1,8 +1,12 @@
 import FriendRequest from "@/components/FriendRequest"
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
+import { Metadata } from "next"
 import { getServerSession } from "next-auth"
 
+export const metadata: Metadata = {
+  title: "Friend Circle | Inbox",
+}
 const RequestFriendPage = async () => {
   const session = await getServerSession(authOptions)
 

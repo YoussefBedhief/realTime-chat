@@ -1,4 +1,9 @@
 import AddFriend from "@/components/AddFriend"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Friend Circle | Add",
+}
 
 const page = () => {
   return (

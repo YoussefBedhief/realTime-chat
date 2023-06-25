@@ -7,6 +7,11 @@ import { toast } from "react-hot-toast"
 import Image from "next/image"
 import BgImage from "@/image/img1.jpg"
 import Logo from "@/image/logo.png"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Friend Circle | Login",
+}
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)

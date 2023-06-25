@@ -13,9 +13,14 @@ import {
   Callout,
 } from "@tremor/react"
 import { AlertOctagon, MailMinus, MailPlus, Mails, Users } from "lucide-react"
+import { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+
+export const metadata: Metadata = {
+  title: "Friend Circle | Dashboard",
+}
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions)

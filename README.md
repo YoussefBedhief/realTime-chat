@@ -30,7 +30,7 @@ Clone the project with this command
 
 Go to the directory
 ```bash
-  cd my-project
+  cd real-time-chat
 ```
 
 Install all the dependencies

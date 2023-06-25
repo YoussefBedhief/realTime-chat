@@ -22,7 +22,7 @@ const LoginPage = () => {
   }
   return (
     <>
-      <div className="flex min-h-full bg-zinc-800 items-center justify-center xl:justify-between py-12 xl:py-0 ">
+      <div className="flex min-h-full h-screen bg-zinc-800 items-center justify-center xl:justify-between py-12 xl:py-0 ">
         <div className="xl:flex relative min-h-screen w-[75vh] hidden">
           <Image fill src={BgImage} alt="Login page Image" />
         </div>

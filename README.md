@@ -25,7 +25,7 @@ This project is a real time chat application with Nextjs 13 which include many f
 
 Clone the project with this command
 ```bash
-  git clone https://link-to-project
+  git clone [https://link-to-project](https://github.com/YoussefBedhief/realTime-chat.git)
 ```
 
 Go to the directory

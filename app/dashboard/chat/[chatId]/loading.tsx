@@ -1,8 +1,6 @@
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
 
-interface loadingProps {}
-
 const loading = ({}) => {
   return (
     <div className="flex flex-col h-full items-center">
